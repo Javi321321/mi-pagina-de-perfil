@@ -12,6 +12,50 @@
       font-size: 0.875rem;
       display: none;
     }
+
+    .card-img-top {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .carousel-item img {
+      height: 400px;
+      object-fit: cover;
+    }
+
+    body {
+      background-color: #181818;
+      color: white;
+    }
+
+    .navbar {
+      background-color: #333;
+    }
+
+    .container, .container-fluid {
+      margin-top: 2rem;
+    }
+
+    #contacto .form-control {
+      background-color: #333;
+      color: white;
+      border: 1px solid #555;
+    }
+
+    #contacto .form-control:focus {
+      background-color: #444;
+      color: white;
+    }
+
+    .btn-primary {
+      background-color: #0056b3;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #004a9f;
+    }
   </style>
 </head>
 <body>
@@ -46,25 +90,23 @@
       <div class="carousel-inner">
         <!-- Primera Imagen -->
         <div class="carousel-item active">
-          <img src="https://via.placeholder.com/1200x400?text=Imagen+1" class="d-block w-100" alt="Imagen 1">
+          <img src="img/conoce-5-lenguajes-de-programacion-basicos.jpg" class="d-block w-100" alt="Conoce Lenguajes de Programación">
         </div>
         <!-- Segunda Imagen -->
         <div class="carousel-item">
-          <img src="https://via.placeholder.com/1200x400?text=Imagen+2" class="d-block w-100" alt="Imagen 2">
+          <img src="img/images.jpg" class="d-block w-100" alt="Imagen de Programación">
         </div>
         <!-- Tercera Imagen -->
         <div class="carousel-item">
-          <img src="https://via.placeholder.com/1200x400?text=Imagen+3" class="d-block w-100" alt="Imagen 3">
+          <img src="img/programacion-2-e1551291144973.jpg" class="d-block w-100" alt="Código de Programación">
         </div>
       </div>
       <!-- Controles de Navegación -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" 
-              data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" 
-              data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Siguiente</span>
       </button>
@@ -73,31 +115,33 @@
 
   <!-- Tarjeta de Perfil -->
   <section id="perfil" class="container my-5">
+    <h2 class="text-center">Conóceme</h2>
     <div class="row justify-content-center">
       <div class="col-md-6">
-        <div class="card text-center">
-          <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" alt="Perfil">
+        <div class="card text-center bg-dark text-white">
+          <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto mt-3" alt="Imagen de Perfil">
           <div class="card-body">
-            <h5 class="card-title">Tu Nombre</h5>
-            <p class="card-text">Breve descripción sobre ti. Puedes hablar de tus intereses, profesión o cualquier información relevante.</p>
-            <a href="#" class="btn btn-primary">Ver más</a>
+            <h5 class="card-title">Nombre Ficticio</h5>
+            <p class="card-text">Soy una persona apasionada por la tecnología, siempre en busca de aprender nuevas habilidades. Me encanta colaborar con otros para resolver problemas complejos e innovar en el sector IT.</p>
+            <a href="#" class="btn btn-primary">GitHub</a>
+            <a href="#" class="btn btn-primary">LinkedIn</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Formulario de Contacto con Validación -->
+  <!-- Formulario de Contacto -->
   <section id="contacto" class="container my-5">
-    <h2 class="text-center mb-4">Contacto</h2>
+    <h2 class="text-center mb-4">Contáctame</h2>
     <div class="row justify-content-center">
       <div class="col-md-8">
         <form id="formularioContacto" novalidate>
           <!-- Campo de Nombre -->
           <div class="mb-3">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required>
-            <div class="error" id="errorNombre">Por favor, ingresa un nombre válido (mínimo 2 caracteres).</div>
+            <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" required pattern="[a-zA-Z\s]{2,}">
+            <div class="error" id="errorNombre">Por favor, ingresa un nombre válido (mínimo 2 letras).</div>
           </div>
           <!-- Campo de Correo Electrónico -->
           <div class="mb-3">
@@ -112,7 +156,7 @@
             <div class="error" id="errorMensaje">Por favor, escribe un mensaje (mínimo 10 caracteres).</div>
           </div>
           <!-- Botón de Enviar -->
-          <button type="submit" class="btn btn-success">Enviar</button>
+          <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
       </div>
     </div>
@@ -127,17 +171,18 @@
     formulario.addEventListener('submit', function(event) {
       let valid = true;
 
-      // Validar Nombre
+      // Validar Nombre (mínimo 2 letras y sin caracteres especiales)
       const nombre = document.getElementById('nombre');
       const errorNombre = document.getElementById('errorNombre');
-      if (nombre.value.trim().length < 2) {
+      const nombreRegex = /^[a-zA-Z\s]{2,}$/;
+      if (!nombreRegex.test(nombre.value)) {
         errorNombre.style.display = 'block';
         valid = false;
       } else {
         errorNombre.style.display = 'none';
       }
 
-      // Validar Email
+      // Validar Email (formato válido)
       const email = document.getElementById('email');
       const errorEmail = document.getElementById('errorEmail');
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -148,7 +193,7 @@
         errorEmail.style.display = 'none';
       }
 
-      // Validar Mensaje
+      // Validar Mensaje (mínimo 10 caracteres)
       const mensaje = document.getElementById('mensaje');
       const errorMensaje = document.getElementById('errorMensaje');
       if (mensaje.value.trim().length < 10) {
